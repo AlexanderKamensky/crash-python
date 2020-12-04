@@ -225,6 +225,11 @@ class PerCPUState:
     # the previous section.  It's possible to override this while
     # loading debuginfo but not when debuginfo is embedded.
     def _relocated_offset(self, var: gdb.Value) -> int:
+        # on aarch64 all .data..percpu are properly rellocated in gdb
+        # so '__per_cpu_offset[cpu] + symbol' works just fine
+        if gdb.inferiors()[0].architecture().name() == "aarch64":
+            return int(var)
+
         addr = int(var)
         start = msymvals['__per_cpu_start']
         size = self._static_ranges[start]
