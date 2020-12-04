@@ -14,6 +14,7 @@ import crash
 import crash.arch
 import crash.arch.x86_64
 import crash.arch.ppc64
+import crash.arch.aarch64
 from crash.types.module import for_each_module, for_each_module_section
 from crash.util import get_symbol_value
 from crash.util.symbols import Types, Symvals, Symbols
